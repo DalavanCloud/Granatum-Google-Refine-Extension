@@ -1,0 +1,36 @@
+Google refine extension for for Biological Linked Data
+Google Refine version <2.5
+The Latest version of the RDF Extension should be installed as well , you can find it <a href="http://lab.linkeddata.deri.ie/2010/grefine-rdf-extension/"></a>
+
+Downlod the extention in the Google Refine Extensions Folder    
+Update the build.xml file in the extensions folder as the following :
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--+
+    |
+    |  Google Refine Extensions Build File    
+    |                
+    +-->
+    
+<project name="google-refine-extensions" default="build" basedir=".">
+  <target name="build">
+    <echo message="Building extensions" />
+    <ant dir="sample/" target="build" />
+    <ant dir="jython/" target="build" />
+    <ant dir="freebase/" target="build" />
+    <ant dir="gdata/" target="build" />
+    <ant dir="rdf-extension/" target="build" />
+    <ant dir="granatum/" target="build" />
+  </target>
+
+  <target name="clean">
+    <echo message="cleaning extensions" />
+    <ant dir="sample/" target="clean" />
+    <ant dir="jython/" target="clean" />
+    <ant dir="freebase/" target="clean" />
+    <ant dir="gdata/" target="clean" />
+    <ant dir="rdf-extension/" target="clean" />
+  <ant dir="granatum/" target="clean" />
+  </target>
+</project>
+
