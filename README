@@ -1,6 +1,6 @@
 Google refine extension for for Biological Linked Data
 Google Refine version <2.5
-The Latest version of the RDF Extension should be installed as well , you can find it <a href="http://lab.linkeddata.deri.ie/2010/grefine-rdf-extension/"></a>
+The Latest version of the RDF Extension should be installed as well , you can find it at http://lab.linkeddata.deri.ie/2010/grefine-rdf-extension/.
 
 Downlod the extention in the Google Refine Extensions Folder    
 Update the build.xml file in the extensions folder as the following :
