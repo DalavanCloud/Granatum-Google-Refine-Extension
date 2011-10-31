@@ -54,17 +54,20 @@ function GranatumImportingSourceUI(controller) {
 
 	  this._elmts = DOM.bind(bodyDiv);
 	  this._elmts.nextButton.click(function(evt) {
+          self._guidGenerator();
+          
 		  // collect the data from the inputs and format them in CSV format .
 		  //headers
-		  var datastr="Compound;NAD(P)H:quinone reductase (QR) induction CD [µM]a;NAD(P)H:quinone reductase (QR) induction IC50 [µM];Cyp1A  inhibition IC50 [µM]";
+		  var datastr="Compound;uuid";//NAD(P)H:quinone reductase (QR) induction CD [µM]a;NAD(P)H:quinone reductase (QR) induction IC50 [µM];Cyp1A  inhibition IC50 [µM]";
 		  var num     = $('.clonedRecord').length;
 		  //combine records is one string
 		  for (var i=0;i<num;i++){
-			 var compoundname =$('input[name="compoundname"]')[i].value;
-			 var nadcd =$('input[name="nadcd"]')[i].value;
-			 var nadic =$('input[name="nadic"]')[i].value;
-			 var cyp1aic =$('input[name="cyp1aic"]')[i].value;
-			 datastr+="\n"+compoundname+";"+nadcd+";"+nadic+";"+cyp1aic;
+			 var compound_name =$('input[name="compound_name"]')[i].value;
+			 var compound_uuid =$('input[name="compound_uuid"]')[i].value;
+			// var nadcd =$('input[name="nadcd"]')[i].value;
+			// var nadic =$('input[name="nadic"]')[i].value;
+			// var cyp1aic =$('input[name="cyp1aic"]')[i].value;
+			 datastr+="\n"+compound_name+";"+compound_uuid;//nadcd+";"+nadic+";"+cyp1aic;
 		  }
 		
 	      self._elmts.textInput[0].value= datastr;
@@ -76,8 +79,9 @@ function GranatumImportingSourceUI(controller) {
 		   
 	      var num     = $('.clonedRecord').length; // how many "duplicatable" input fields we currently have
           var newNum  = new Number(num + 1);      // the numeric ID of the new input field being added
-          alert(num);
+          
           var recordsDiv=$('#recordsDiv');
+          self._guidGenerator();
           // create the new element via clone(), and manipulate it's ID using newNum value
           var newClonedRecord = $('#clonedRecord'+num).clone().attr("id","clonedRecord"+newNum).addClass("clonedRecord");
           // manipulate the name/id values of the input inside the new element
@@ -93,4 +97,15 @@ function GranatumImportingSourceUI(controller) {
 
 	GranatumImportingSourceUI.prototype.focus = function() {
 	  this._elmts.textInput.focus();
+	};
+
+	GranatumImportingSourceUI.prototype._guidGenerator= function () {
+		
+	    var S4 = function() {
+	       return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+	    };
+	    var uuid= (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+	    
+	    var num     = $('.clonedRecord').length; // how many "duplicatable" input fields we currently have
+        $('input[name="compound_uuid"]')[num-1].value=uuid;
 	};

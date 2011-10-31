@@ -56,18 +56,7 @@ GranatumOperationsDialog.prototype._constructBody = function(body) {
 GranatumOperationsDialog.prototype._runOperation = function(oprID) {
 	switch (oprID) {
 	case "uuid":
-		//Create column uuid at index 1 by fetching URLs based on column Compound using expression grel:\"http://vmdhcls04.deri.ie/uuid.php\
-		Refine.postCoreProcess("add-column-by-fetching-urls", {
-			baseColumnName : "Compound",
-			urlExpression : "grel:'http:\/\/vmdhcls04.deri.ie\/uuid.php'",
-			newColumnName : "uuid",
-			columnInsertIndex : 1,
-			delay : "50000",
-			onError : "set-to-blank"
-		}, {}, {everythingChanged: true }, {
-
-			onDone : function() {
-			Refine.postCoreProcess("text-transform", {
+		Refine.postCoreProcess("text-transform", {
 				columnName : "uuid",
 				expression : "grel:value.parseJson()",
 				repeat : false,
@@ -75,11 +64,6 @@ GranatumOperationsDialog.prototype._runOperation = function(oprID) {
 				onError : "set-to-blank"
 			}, {}, { everythingChanged: true}, {});
 
-			}
-		}
-
-		);
-		
 
 		break;
 	
