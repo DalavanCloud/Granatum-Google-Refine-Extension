@@ -1,58 +1,12 @@
 
-<div class="grid-layout layout-normal">
-<table>
-	<tr>
+<div class="grid-layout layout-normal"  >
+<div style="overflow: auto; width: 1500px; height: 454px;">
+<table id="expirmentTable" bind="expirmentTable">
 
-		<td>Compound</td>
-		<!--<td>NAD(P)H:quinone reductase (QR) induction CD [µM]a</td>
-		<td>NAD(P)H:quinone reductase (QR) induction IC50 [µM]</td>
-		<td>Cyp1A inhibition IC50 [µM]</td>
-		<td>Operations</td>
-	-->
-		<td>UUID</td>
-	</tr>
-
-	<tr>
-	<td >
-		<form id="myForm" bind="myForm" action="">
-		<div id="recordsDiv" name="recordsDiv" bind="recordsDiv">
-		<div id="clonedRecord1" name="clonedRecord" class="clonedRecord">
-	
-		<input type="text" name="compound_name" id="compound_name1" />
-		<!--<input type="text" name="nadcd" id="nadcd1" />
-		 <input type="text" name="nadic" id="nadic1" />
-		 <input type="text" name="cyp1aic" id="cyp1aic1" />
-		 Operations
-        -->
-        <input type="text" disabled="disabled" bind="compound_uuid" name="compound_uuid" id="compound_uuid1" />
-        </div>
-        
-        </div>
-        </form>
-        </td>				
-	</tr>
-	<tr>
-		<td colspan="3">
-		<div><input type="button" id="btnAdd" bind="btnAdd" value="add" /></div>
-		</td>
-	</tr>
 </table>
 </div>
-
-<form bind="form" action="">
-<div class="grid-layout layout-normal">
-<table>
-	<tr>
-		<td><input type="hidden" bind="textInput" name="clipboard"
-			id="default-importing-clipboard-textarea" /> <input type="hidden"
-			name="format" value="text/line-based/*sv"></td>
-	</tr>
-	<tr>
-		<td>
-		<button bind="nextButton" class="button button-primary" type="button">Next
-		&raquo;</button>
-		</td>
-	</tr>
-</table>
 </div>
-</form>
+
+
+
+

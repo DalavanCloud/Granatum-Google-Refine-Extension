@@ -1,0 +1,35 @@
+<form id="myForm" bind="myForm" action="">
+<div class="grid-layout layout-normal" bind="all" >
+<table >
+
+	<tr>
+		<td>Study Type :</td>
+		<td colspan="3"><select name="slctStudyTypes" bind="slctStudyTypes" id="slctStudyTypes"></select></td>
+	</tr>
+	<tr>
+	<td colspan="4">
+	<table name="attributesContainer" id="attributesContainer" bind="attributesContainer"></table>
+	</td>
+	</tr>
+	<tr>
+	<td>
+     	Choose Study Results Entry Method 
+    </td>
+	<td>
+     	<select name="slctEntry" bind="slctEntry">
+     	<option value="csv">CSV File</option>
+     	<option value="manual">Manual Entry</option>
+     	</select> 
+	</td>
+	<td><span name="noofcolumnlbl" value="noofcolumnlbl" bind="noofcolumnlbl" >Number of Columns</span></td>
+	<td><input name="noofcolumn" value="2" bind="noofcolumn" style="display:none"/></td>
+	</tr>
+	<tr>
+	<td colspan="4">
+	 <input type="button" name="Start" bind="startbtn" value="Start" />
+	</td>
+	</tr>
+</table>
+</div>
+<div name="importingContainerDiv" id="importingContainerDiv" bind="importingContainerDiv" style="display:none"></div>
+</form>

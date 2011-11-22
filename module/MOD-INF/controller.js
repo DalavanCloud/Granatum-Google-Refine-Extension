@@ -56,9 +56,21 @@ function init() {
 		    "index/scripts",
 		    module,
 		    [
-		      "scripts/index/granatum-data-insertion.js"
+		      "scripts/index/externals/form_complete.js",
+		      "scripts/index/externals/crossdomain_autocomplete.js",
+		      "scripts/index/granatum-index-source.js",
+		      "scripts/index/granatum-index-handler.js",
+		      "scripts/index/granatum-importing-controller.js",
+		      "scripts/index/granatum-study-selection.js"
 		    ]
   );
+  ClientSideResourceManager.addPaths(
+		    "index/styles",
+		    module,
+		    [
+		      "styles/index/externals/jquery.autocomplete.css"
+		    ]
+);
   // Style files to inject into /project page
   ClientSideResourceManager.addPaths(
     "project/styles",
@@ -69,6 +81,17 @@ function init() {
   );
   RefineServlet.registerCommand(module, "project-json", new Packages.com.google.refine.granatumExtension.commands.JsonProjectCommand());
   RefineServlet.registerCommand(module, "add-column-by-fetching-urls-ex", new Packages.com.google.refine.granatumExtension.commands.column.AddColumnByFetchingURLsCommand());
+  RefineServlet.registerCommand(module, "granatum-get-study-types", new Packages.com.google.refine.granatumExtension.commands.GetStudyTypesCommand());
+  RefineServlet.registerCommand(module, "granatum-get-study-attributes", new Packages.com.google.refine.granatumExtension.commands.GetStudyAttributesCommand());
+  
+  
+  var IM = Packages.com.google.refine.importing.ImportingManager;
+  
+  IM.registerController(
+    module,
+    "granatum-importing-controller",
+    new Packages.com.google.refine.granatumExtension.importing.GranatumDefaultImportingController()
+  );
 }
 
 /*
