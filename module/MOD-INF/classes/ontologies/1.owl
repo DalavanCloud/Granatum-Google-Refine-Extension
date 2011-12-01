@@ -1,0 +1,694 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:UO="http://purl.org/obo/owl/UO#"
+    xmlns:obo="http://purl.obolibrary.org/obo/"
+    xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
+    xmlns:p1="http://granatum.org/ns/"
+    xmlns:kegg="http://kegg.bio2rdf.org/"
+    xmlns:ncithesaurus="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#"
+    xmlns:dbpedia="http://dbpedia.org/"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:pubchem2="http://bio2rdf.org/ns/ns/ns/pubchem#"
+    xmlns:s3db="http://s3db.org/core#"
+    xmlns:void="http://granatum.org/schema/http://rdfs.org/ns/void#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:drugbank="http://www4.wiwiss.fu-berlin.de/drugbank/"
+    xmlns:bio2rdf="http://bio2rdf.org/ns/bio2rdf#"
+    xmlns="http://granatum.org/schema/"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:pubchem="http://granatum.org/schema/http://pubchem.bio2rdf.org/"
+    xmlns:xsp="http://www.owl-ontologies.com/2005/08/07/xsp.owl#"
+    xmlns:void2="http://rdfs.org/ns/void#"
+    xmlns:chebi="http://chebi.bio2rdf.org/"
+    xmlns:linkedlifedata="http://linkedlifedata.com/"
+    xmlns:EFO_0000311="http://www.ebi.ac.uk/efo/EFO_0000311#"
+    xmlns:go="http://go.bio2rdf.org/"
+    xmlns:snap="http://www.ifomis.org/bfo/1.1/snap#"
+    xmlns:efo="http://www.ebi.ac.uk/efo/"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:acgt="http://www.ifomis.org/acgt/1.0#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://granatum.org/schema/">
+  <owl:Ontology rdf:about="">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Created by Helena F. Deus</rdfs:comment>
+    <owl:imports rdf:resource="http://www.ifomis.org/acgt/1.0"/>
+    <owl:imports rdf:resource="http://www.ebi.ac.uk/efo/"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Granaum Biomedical Semantic Data Model</rdfs:label>
+  </owl:Ontology>
+  <rdfs:Class rdf:about="http://www.ifomis.org/bfo/1.1/snap#Tumor">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://granatum.org/schema/Cancer"/>
+    </rdfs:subClassOf>
+  </rdfs:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/Source"/>
+  <owl:Class rdf:about="http://granatum.org/schema/dbpediaURI">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://granatum.org/schema/Resources"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/in_silico_assay">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://granatum.org/schema/Bioassay"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/COX1IC50">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Cox-1 inhibition IC50 [µM]</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://granatum.org/schema/IC50"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/pubmedURL">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Resources"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/epigeneticsStudy">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://granatum.org/schema/Study"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/ORAC">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Measurement of oxygen radical absorbance capacity</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://granatum.org/schema/Measurement"/>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >one ORAC unit equals the net protection of -PE produced by 1 µM Trolox.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/IC50">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://granatum.org/schema/Concentration"/>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >half-maximal inhibitory concentration</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/ChemopreventiveAgent">
+    <owl:equivalentClass>
+      <owl:Class rdf:about="http://granatum.org/schema/cma"/>
+    </owl:equivalentClass>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://s3db.org/core#Collection"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/XXOSC50">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >xanthine oxidase SC50</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://granatum.org/schema/SC50"/>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Numbers in parentheses indicate the percentage of scavenging or inhibition at the indicated concentrations.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/IC">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Maximum Inhibitory concentration</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://granatum.org/schema/Concentration"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/CancerType">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://granatum.org/schema/Cancer"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/max_percent_inhibition">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://granatum.org/schema/percent_inhibition"/>
+    </rdfs:subClassOf>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/pubmedURI">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Resources"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/cell_activity">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://granatum.org/schema/Measurement"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/Organism"/>
+  <owl:Class rdf:about="http://granatum.org/schema/Concentration">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://granatum.org/schema/Measurement"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://purl.org/obo/owl/UO#UO_0000064">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Concentration"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >micromolar</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/Cyp1AIC50">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/IC50"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >IC50 of Cyp1A</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/CD">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Concentration"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >concentration required to double the specific activity of quinone reductase</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/Bioassay">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.ebi.ac.uk/efo/EFO_0000311#Assay"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/QRIC50">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >IC50 of Quinone Reductase</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/IC50"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/Measurement">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://granatum.org/schema/percent_inhibition"/>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >measurementUnit</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/inhibitory_concentration">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Measurement"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.ebi.ac.uk/efo/EFO_0000311#Natural">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Source"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/Databases">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Resources"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/iNOSIC50">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/IC50"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Inhibition of iNOS induction A-IC50</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/goURI">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Resources"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/Author">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >author of a publication</rdfs:comment>
+    <rdfs:subClassOf>
+      <rdf:Description rdf:about="http://www.ifomis.org/acgt/1.0#ProfessionalRole">
+        <rdfs:subClassOf rdf:resource="http://www.ifomis.org/acgt/1.0#HumanBeing"/>
+      </rdf:Description>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://s3db.org/core#Collection"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.ebi.ac.uk/efo/EFO_0000311#Publication"/>
+    </owl:disjointWith>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/Protocol">
+    <rdfs:subClassOf rdf:resource="http://s3db.org/core#Collection"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/carcinogenActivating">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://granatum.org/schema/chemopreventionStudy"/>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >e.g. Inhibition of cytochrome P450 (Cyp) 1A activity </rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.ebi.ac.uk/efo/EFO_0000311#Synthetic">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Source"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/biologicalMechanism"/>
+  <owl:Class rdf:about="http://granatum.org/schema/Cancer">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.ebi.ac.uk/efo/EFO_0000311#Disease"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/chebiURI">
+    <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://chebi.bio2rdf.org/sparql</rdfs:seeAlso>
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Resources"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/chemSpiderURL">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Resources"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/in_vivo_assay">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Bioassay"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/drugbankURI">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Resources"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/max_inhibitory_concentration">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/inhibitory_concentration"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/percent_inhibition">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Measurement"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/mechanism_based">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Bioassay"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/user_assay">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Bioassay"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/iNOSTIC50">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/IC50"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Inhibition of iNOS induction A-IC50 [µM]a T-IC50 [µM]b</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/Study">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A study is a collection of bioassays sharing a protocol</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://s3db.org/core#Collection"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/toxicityStudy">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Study"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/HL60IC50">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/IC50"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Numbers in parentheses indicate the percentage of scavenging or inhibition at the indicated concentrations.</rdfs:comment>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Inhibition of 12-O-tetradecanoylphorbol-13-acetate (TPA)-induced superoxide anion radical generation in differentiated HL-60 cells (HL-60 assay)</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/pubchemURI">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Resources"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/fractionation_guided">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Bioassay"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://purl.org/obo/owl/UO#UO_0000062">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Concentration"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >molar</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/ORACOH">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/ORAC"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/chemopreventionStudy">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Study"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/enzymeInduction">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/chemopreventionStudy"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >e.g. NAD(P)H:quinone reductase (quinone reductase, QR) activity</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://rdfs.org/ns/void#Dataset">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Dataset</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Resources"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/BioMaterial">
+    <rdfs:subClassOf rdf:resource="http://s3db.org/core#Collection"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/in_vitro_assay">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Bioassay"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/keggURI">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Resources"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/OCDIC50">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/IC50"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Inhibition of ODC induction IC50 [µM]</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/Pathway">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Instances can come from any of the pathway databases. Instances should be indexed with those URI. </rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.ebi.ac.uk/efo/EFO_0000311#Publication">
+    <rdfs:subClassOf rdf:resource="http://s3db.org/core#Collection"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/cma">
+    <rdfs:subClassOf rdf:resource="http://s3db.org/core#Collection"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/DPPHSC50">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1,1-diphenyl-2 picrylhydrazyl SC50</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://granatum.org/schema/SC50"/>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Numbers in parentheses indicate the percentage of scavenging or inhibition at the indicated concentrations.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/SC50">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Concentration"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >half-maximal scavenging concentration</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.ebi.ac.uk/efo/EFO_0000311#Assay">
+    <rdfs:subClassOf rdf:resource="http://s3db.org/core#Collection"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://granatum.org/schema/Organ"/>
+  <owl:Class rdf:about="http://granatum.org/schema/ORACROO">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/ORAC"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="http://granatum.org/schema/similar_to"/>
+  <owl:ObjectProperty rdf:about="http://granatum.org/schema/http://rdfs.org/ns/void#uriLookupEndpoint">
+    <rdfs:domain rdf:resource="http://granatum.org/schema/Resources"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://granatum.org/schema/part_of">
+    <rdfs:domain>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://granatum.org/schema/Bioassay"/>
+        <owl:onProperty rdf:resource="http://granatum.org/schema/part_of"/>
+      </owl:Restriction>
+    </rdfs:domain>
+    <rdfs:range>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://granatum.org/schema/part_of"/>
+        <owl:someValuesFrom rdf:resource="http://granatum.org/schema/Study"/>
+      </owl:Restriction>
+    </rdfs:range>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://granatum.org/schema/used_cma">
+    <rdfs:range>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://granatum.org/schema/used_cma"/>
+        <owl:someValuesFrom rdf:resource="http://granatum.org/schema/ChemopreventiveAgent"/>
+      </owl:Restriction>
+    </rdfs:range>
+    <rdfs:domain>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://granatum.org/schema/Bioassay"/>
+        <owl:onProperty rdf:resource="http://granatum.org/schema/used_cma"/>
+      </owl:Restriction>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://granatum.org/schema/topic"/>
+  <owl:ObjectProperty rdf:about="http://granatum.org/schema/max_inhibitory_conc">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >concentration values in Molar</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://granatum.org/schema/measures">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >what is being measured in a certain study. E.g. quinone reductase activity. Values are GO terms</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.ebi.ac.uk/efo/EFO_0000311#isPublishedBy"/>
+  <owl:ObjectProperty rdf:about="http://granatum.org/schema/target_mechanism">
+    <rdfs:subPropertyOf rdf:resource="http://granatum.org/schema/topic"/>
+    <rdfs:domain>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://granatum.org/schema/Study"/>
+        <owl:onProperty rdf:resource="http://granatum.org/schema/target_mechanism"/>
+      </owl:Restriction>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.ebi.ac.uk/efo/EFO_0000311#hasStatus">
+    <rdfs:range>
+      <rdf:Description rdf:about="http://www.ebi.ac.uk/efo/EFO_0001742">
+        <rdfs:subClassOf rdf:resource="http://www.ebi.ac.uk/efo/EFO_0000311#Publication"/>
+      </rdf:Description>
+    </rdfs:range>
+    <rdfs:domain rdf:resource="http://www.ebi.ac.uk/efo/EFO_0000311#Publication"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://granatum.org/schema/used_organism">
+    <rdfs:domain>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://granatum.org/schema/used_organism"/>
+        <owl:someValuesFrom rdf:resource="http://granatum.org/schema/user_assay"/>
+      </owl:Restriction>
+    </rdfs:domain>
+    <rdfs:range>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://granatum.org/schema/used_organism"/>
+        <owl:someValuesFrom rdf:resource="http://granatum.org/schema/Organism"/>
+      </owl:Restriction>
+    </rdfs:range>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://granatum.org/schema/used_protocol">
+    <rdfs:range>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://granatum.org/schema/Protocol"/>
+        <owl:onProperty rdf:resource="http://granatum.org/schema/used_protocol"/>
+      </owl:Restriction>
+    </rdfs:range>
+    <rdfs:domain>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://granatum.org/schema/used_protocol"/>
+        <owl:someValuesFrom rdf:resource="http://granatum.org/schema/Bioassay"/>
+      </owl:Restriction>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://granatum.org/schema/naturalVsSynthetic"/>
+  <owl:ObjectProperty rdf:about="http://www.ebi.ac.uk/efo/EFO_0000311#hasPublication">
+    <rdfs:range rdf:resource="http://www.ebi.ac.uk/efo/EFO_0000311#Publication"/>
+    <owl:inverseOf rdf:resource="http://www.ebi.ac.uk/efo/EFO_0000311#isPublishedBy"/>
+    <rdfs:domain rdf:resource="http://granatum.org/schema/Author"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://granatum.org/schema/study_part"/>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/activity"/>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/publicationNumber">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >How many times has this compound been cited in the literature?</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/antiOxidantActivity">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Does this compound have antioxidative properties?</rdfs:comment>
+    <rdfs:subPropertyOf rdf:resource="http://granatum.org/schema/activity"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/actionMechanism">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >What is the action mechanism of the component?</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/publication"/>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/source">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >If this compound is normally found in a natural substatnce, indicate which in the domain</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/PDB_id">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >If you know the PDB Id of this component, insert it here.</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/toxicity">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/hashedFingerprint"/>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/toxicConcentration">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >If toxic, at which concentration has it been deemed toxic? </rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/chemopreventionMechanism">
+    <rdfs:subPropertyOf rdf:resource="http://granatum.org/schema/actionMechanism"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/SMILESnotation">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >If you have the SMILES notation for this agent, insert it here.</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/study_reference">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Paper describing a study</rdfs:label>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://granatum.org/schema/references"/>
+    </rdfs:subPropertyOf>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://bio2rdf.org/go:0003960">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >NAD(P)H:quinone reductase (quinone reductase, QR) activity </rdfs:label>
+    <rdfs:subPropertyOf rdf:resource="http://granatum.org/schema/activity"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/MDLmolfile">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >If you  have an MDL Molfile for this component, insert it here</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/references">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Introduce here the reference to the publications where this component has been cited</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/efficacyInVivo">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >In this chemopreventative agent has been tested in vivo, what was the measured efficacy?</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/pathwayAction">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Which metabolic pathways is this agent know to affect?</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/targetOrgan">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Indicate whether there is a known target orgain for this chemopreventative agent</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/output"/>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/structuralKey"/>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/cma_reference">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Paper where cma is references</rdfs:label>
+    <rdfs:subPropertyOf rdf:resource="http://granatum.org/schema/references"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/connectionTable">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >If you have a connection table for this chemical component, indicate it here.</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/input"/>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/diagram2D">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >If you have a link to an image with the 2D representation of this molecular, indicate its URL here</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/published">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Has this been component been published before? Answer yes or no.</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://granatum.org/schema/used_cellLine">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://bio2rdf.org/go:0015034">
+    <rdfs:subPropertyOf rdf:resource="http://granatum.org/schema/activity"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >cytochrome P450 (Cyp) 1A activity </rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://bio2rdf.org/ns/ns/ns/pubchem#InChI"/>
+  <owl:DatatypeProperty rdf:about="http://bio2rdf.org/ns/bio2rdf#inchi">
+    <owl:equivalentProperty rdf:resource="http://bio2rdf.org/ns/ns/ns/pubchem#InChI"/>
+  </owl:DatatypeProperty>
+  <owl:NamedIndividual rdf:about="http://granatum.org/schema/pubmed">
+    <rdf:type rdf:resource="http://granatum.org/schema/Databases"/>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www4.wiwiss.fu-berlin.de/drugbank/sparql">
+    <rdf:type rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >drugbank sparql endpoint</rdfs:label>
+  </owl:NamedIndividual>
+  <owl:AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#comment"/>
+  <owl:NamedIndividual rdf:about="http://granatum.org/schema/natural">
+    <rdf:type rdf:resource="http://granatum.org/schema/Source"/>
+  </owl:NamedIndividual>
+  <rdf:Description rdf:about="http://www.ebi.ac.uk/efo/EFO_0003863">
+    <rdfs:subClassOf>
+      <rdf:Description rdf:about="http://www.ebi.ac.uk/efo/EFO_0000311">
+        <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Cancer"/>
+      </rdf:Description>
+    </rdfs:subClassOf>
+  </rdf:Description>
+  <owl:NamedIndividual rdf:about="http://granatum.org/schema/enzymeModulation"/>
+  <rdf:Description rdf:about="http://purl.obolibrary.org/obo/OBI_0000070">
+    <rdfs:subClassOf rdf:resource="http://www.ebi.ac.uk/efo/EFO_0000311#Assay"/>
+  </rdf:Description>
+  <owl:AllDisjointClasses/>
+  <rdf:Description rdf:about="http://www.ebi.ac.uk/efo/EFO_0003826">
+    <rdfs:subClassOf rdf:resource="http://www.ebi.ac.uk/efo/EFO_0000311"/>
+  </rdf:Description>
+  <owl:NamedIndividual rdf:about="http://granatum.org/schema/chebi">
+    <rdf:type rdf:resource="http://granatum.org/schema/Databases"/>
+  </owl:NamedIndividual>
+  <rdf:Description rdf:about="http://purl.org/obo/owl/UO#UO:0000000">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Measurement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ifomis.org/acgt/1.0#hasProtocol">
+    <rdfs:domain rdf:resource="http://granatum.org/schema/Study"/>
+    <rdfs:range rdf:resource="http://granatum.org/schema/Protocol"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ebi.ac.uk/efo/EFO_0001639">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Cancer"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.obolibrary.org/obo/OBI_0000272">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Protocol"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.obolibrary.org/obo/IAO_0000030">
+    <rdfs:subClassOf rdf:resource="http://www.ifomis.org/bfo/1.1/snap#ThreeDimensionalRegion"/>
+  </rdf:Description>
+  <owl:NamedIndividual rdf:about="http://dbpedia.org/sparql">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >dbpedia sparql endpoint</rdfs:label>
+    <rdf:type rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+  </owl:NamedIndividual>
+  <rdf:Description rdf:about="http://www.ifomis.org/acgt/1.0#CancerTreatment">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Cancer"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ifomis.org/acgt/1.0#MeasurementUnit">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Measurement"/>
+  </rdf:Description>
+  <owl:NamedIndividual rdf:about="http://granatum.org/schema/synthetic">
+    <rdf:type rdf:resource="http://granatum.org/schema/Source"/>
+  </owl:NamedIndividual>
+  <rdf:Description rdf:about="http://www.ifomis.org/acgt/1.0#Disease">
+    <rdfs:subClassOf rdf:resource="http://www.ebi.ac.uk/efo/EFO_0000311#Disease"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ebi.ac.uk/efo/EFO_0000808">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Organ"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ifomis.org/acgt/1.0#Publication">
+    <rdfs:subClassOf rdf:resource="http://www.ebi.ac.uk/efo/EFO_0000311#Publication"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ebi.ac.uk/efo/EFO_0000408">
+    <rdfs:subClassOf rdf:resource="http://www.ebi.ac.uk/efo/EFO_0000311#Disease"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ifomis.org/acgt/1.0#Protocol">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Protocol"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ifomis.org/acgt/1.0#Organism">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Organism"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ifomis.org/acgt/1.0#describes">
+    <rdfs:range rdf:resource="http://granatum.org/schema/Study"/>
+    <rdfs:domain>
+      <rdf:Description rdf:about="http://www.ebi.ac.uk/efo/EFO_0001426">
+        <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Study"/>
+      </rdf:Description>
+    </rdfs:domain>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ifomis.org/acgt/1.0#ChemotherapyDrug">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/ChemopreventiveAgent"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ebi.ac.uk/efo/EFO_0000635">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Organism"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ebi.ac.uk/efo/EFO_0003860">
+    <rdfs:subClassOf rdf:resource="http://www.ebi.ac.uk/efo/EFO_0000311"/>
+  </rdf:Description>
+  <owl:NamedIndividual rdf:about="http://kegg.bio2rdf.org/sparql">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >kegg spaql endpoint</rdfs:label>
+    <rdf:type rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+  </owl:NamedIndividual>
+  <rdf:Description rdf:about="http://www.ifomis.org/acgt/1.0#Chemotherapy">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/ChemopreventiveAgent"/>
+  </rdf:Description>
+  <owl:NamedIndividual rdf:about="http://linkedlifedata.com/sparql">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >linked life data sparql endpoint</rdfs:label>
+    <rdf:type rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+  </owl:NamedIndividual>
+  <rdf:Description rdf:about="http://www.ebi.ac.uk/efo/EFO_0001444">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Measurement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ebi.ac.uk/efo/EFO_0003869">
+    <rdfs:subClassOf rdf:resource="http://www.ebi.ac.uk/efo/EFO_0000311"/>
+  </rdf:Description>
+  <owl:NamedIndividual rdf:about="http://chebi.bio2rdf.org/sparql">
+    <rdf:type rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >chebi sparql endpoint</rdfs:label>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://granatum.org/schema/pubchem">
+    <rdf:type rdf:resource="http://granatum.org/schema/Databases"/>
+  </owl:NamedIndividual>
+  <rdf:Description rdf:about="http://purl.obolibrary.org/obo/OBI_0100026">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/Organism"/>
+  </rdf:Description>
+  <owl:NamedIndividual rdf:about="http://granatum.org/schema/drugbank">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >drugbank</rdfs:label>
+    <rdf:type rdf:resource="http://granatum.org/schema/Databases"/>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://granatum.org/schema/bioassay1">
+    <used_organism>
+      <owl:NamedIndividual rdf:about="http://granatum.org/schema/Mouse">
+        <rdf:type rdf:resource="http://granatum.org/schema/Organism"/>
+      </owl:NamedIndividual>
+    </used_organism>
+    <rdf:type rdf:resource="http://granatum.org/schema/user_assay"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Inhibition of carcinogen-induced development of precancerous lesions in the mouse mammary grand organ culture model (MMOC)</rdfs:comment>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://granatum.org/schema/kegg">
+    <rdf:type rdf:resource="http://granatum.org/schema/Databases"/>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://granatum.org/schema/http://pubchem.bio2rdf.org/sparql">
+    <rdf:type rdf:resource="http://granatum.org/schema/pubchemURI"/>
+  </owl:NamedIndividual>
+  <rdf:Description rdf:about="http://www.ebi.ac.uk/efo/EFO_0003897">
+    <rdfs:subClassOf rdf:resource="http://www.ebi.ac.uk/efo/EFO_0000311"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ifomis.org/acgt/1.0#ChemotherapyRegime">
+    <rdfs:subClassOf rdf:resource="http://granatum.org/schema/ChemopreventiveAgent"/>
+  </rdf:Description>
+  <owl:NamedIndividual rdf:about="http://go.bio2rdf.org/sparql">
+    <rdf:type rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >go sparql endpoint</rdfs:label>
+  </owl:NamedIndividual>
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 3.4.7, Build 620)  http://protege.stanford.edu -->

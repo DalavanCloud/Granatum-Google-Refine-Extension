@@ -140,7 +140,7 @@ Refine.GranatumDefaultImportingController.prototype._createProject = function() 
 		    var jobID=this._jobID;
 		    $.post(
 		      "/command/core/importing-controller?" + $.param({
-		        "controller": "granatum/granatum-importing-controller",
+		        "controller": "core/default-importing-controller",
 		        "jobID": this._jobID,
 		        "subCommand": "create-project"
 		      }),
@@ -168,6 +168,21 @@ Refine.GranatumDefaultImportingController.prototype._createProject = function() 
 		                },
 		                function(jobID, job) {
 		                  Refine.CreateProjectUI.cancelImportinJob(jobID);
+		                 //---------------------
+		                  $.ajax({
+		                	  type: 'POST',
+		                	  url: "/command/granatum/granatum-save-metadata?",
+		                	  data: $.param({
+		            		        "project": job.config.projectID,
+		            		        "subCommand": "save-metadata",
+		            		    	"slctStudyTypes" : job.config.slctStudyTypes,
+		            		        "metadataAttributes" :JSON.stringify(job.config.metadataAttributes),
+		            		        "source":"granatum",
+		            		        "initial": "yes"
+		            		      }),
+		            		      async:false
+		                	});
+		                   //---------------------
 		                  document.location = "project?project=" + job.config.projectID;
 		                },
 		                function(job) {

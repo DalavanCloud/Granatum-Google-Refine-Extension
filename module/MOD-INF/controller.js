@@ -41,14 +41,23 @@ var ClientSideResourceManager = Packages.com.google.refine.ClientSideResourceMan
 function init() {
   // Packages.java.lang.System.err.println("Initializing granatum extension");
   // Packages.java.lang.System.err.println(module.getMountPoint());
-	var RefineServlet = Packages.com.google.refine.RefineServlet;
+var RefineServlet = Packages.com.google.refine.RefineServlet;
   // Script files to inject into /project page
+
+/*
+ *  Operations
+ */
+Packages.com.google.refine.operations.OperationRegistry.registerOperation(
+    module, "add-columns-by-fetching-urls-no-check", Packages.com.google.refine.granatumExtension.operations.ColumnAdditionByFetchingURLsGranatumOperation);
+
+RefineServlet.cacheClass(Packages.com.google.refine.rdf.operations.SaveRdfSchemaOperation$RdfSchemaChange);
 
   ClientSideResourceManager.addPaths(
     "project/scripts",
     module,
     [
       "scripts/menu-bar-extensions.js",
+      "scripts/granatum-project-setup.js",
       "scripts/granatum-operations.js"
     ]
   );
@@ -57,6 +66,7 @@ function init() {
 		    module,
 		    [
 		      "scripts/index/externals/form_complete.js",
+		      "scripts/index/externals/col_titles_autocomplete.js",
 		      "scripts/index/externals/crossdomain_autocomplete.js",
 		      "scripts/index/granatum-index-source.js",
 		      "scripts/index/granatum-index-handler.js",
@@ -83,8 +93,9 @@ function init() {
   RefineServlet.registerCommand(module, "add-column-by-fetching-urls-ex", new Packages.com.google.refine.granatumExtension.commands.column.AddColumnByFetchingURLsCommand());
   RefineServlet.registerCommand(module, "granatum-get-study-types", new Packages.com.google.refine.granatumExtension.commands.GetStudyTypesCommand());
   RefineServlet.registerCommand(module, "granatum-get-study-attributes", new Packages.com.google.refine.granatumExtension.commands.GetStudyAttributesCommand());
-  
-  
+  RefineServlet.registerCommand(module, "granatum-save-metadata", new Packages.com.google.refine.granatumExtension.commands.SaveStudyMetadataCommand());
+  RefineServlet.registerCommand(module, "granatum-get-metadata", new Packages.com.google.refine.granatumExtension.commands.GetStudyMetadataCommand());
+  RefineServlet.registerCommand(module, "granatum-apply-rdf-operations", new Packages.com.google.refine.granatumExtension.commands.ApplyGranatumRDFOperationsCommand());
   var IM = Packages.com.google.refine.importing.ImportingManager;
   
   IM.registerController(

@@ -80,14 +80,18 @@ public class GranatumOntology {
 	public  ArrayList<StudyAttribute> getStudyAttributes(String studyuri){
 		String queryString = 
 			"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " +
-			"SELECT ?uri ?range " +
+			"PREFIX owl:  <http://www.w3.org/2002/07/owl#> "+
+			"SELECT ?uri ?range ?type" +
 			"WHERE {" +
 			"      {?uri rdfs:domain <http://granatum.org/schema/Study> ." +
-			"	   ?uri rdfs:range ?range .}" +
+			"	   ?uri rdfs:range ?range ." +
+			"	    OPTIONAL {?uri a ?type. } "+
+			"}" +
 			"UNION " +
 			"	   {?uri rdfs:domain <"+studyuri+"> ." +
-			"       ?uri rdfs:range ?range .}" +
-			"      }";
+			"       ?uri rdfs:range ?range ." +
+			"	   OPTIONAL {?uri a ?type. }"+
+			"      }}";
 
 		Query query = QueryFactory.create(queryString);
 
@@ -100,6 +104,10 @@ public class GranatumOntology {
 			StudyAttribute studyAttribute=new StudyAttribute();
 			studyAttribute.setAttributeName(binding.get("uri").toString());
 			studyAttribute.setAttributeRange(binding.get("range").toString());
+			if(binding.get("type")!=null){
+			studyAttribute.setInputType(binding.get("type").toString());
+			}
+							
 			studyAttributes.add(studyAttribute);
 		}
 		//OutputStream jsonResults = new StringBufferOutputStream();

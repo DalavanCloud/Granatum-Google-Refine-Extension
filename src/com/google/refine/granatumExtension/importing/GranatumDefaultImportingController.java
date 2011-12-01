@@ -93,20 +93,13 @@ public class GranatumDefaultImportingController implements ImportingController {
         String subCommand = parameters.getProperty("subCommand");
         if ("load-raw-data".equals(subCommand)) {
             doLoadRawData(request, response, parameters);
-        } else if ("update-file-selection".equals(subCommand)) {
-            doUpdateFileSelection(request, response, parameters);
-        } else if ("initialize-parser-ui".equals(subCommand)) {
-            doInitializeParserUI(request, response, parameters);
-        } else if ("update-format-and-options".equals(subCommand)) {
-            doUpdateFormatAndOptions(request, response, parameters);
-        } else if ("create-project".equals(subCommand)) {
-            doCreateProject(request, response, parameters);
         } else {
             HttpUtilities.respond(response, "error", "No such sub command");
         }
     }
 
-    private void doLoadRawData(HttpServletRequest request, HttpServletResponse response, Properties parameters)
+
+	private void doLoadRawData(HttpServletRequest request, HttpServletResponse response, Properties parameters)
         throws ServletException, IOException {
 
         long jobID = Long.parseLong(parameters.getProperty("jobID"));
@@ -126,6 +119,7 @@ public class GranatumDefaultImportingController implements ImportingController {
             
             ImportingUtilities.loadDataAndPrepareJob(
                 request, response, parameters, job, config);
+            //save custom metadata Temproray in the job.config
             JSONUtilities.safePut(config, "slctStudyTypes", parameters.getProperty("slctStudyTypes"));
             JSONObject attributes=new JSONObject(parameters.getProperty("metadataAttributes"));
             JSONUtilities.safePut(config, "metadataAttributes", attributes);
@@ -137,173 +131,9 @@ public class GranatumDefaultImportingController implements ImportingController {
         }
     }
     
-    private void doUpdateFileSelection(HttpServletRequest request, HttpServletResponse response, Properties parameters)
-        throws ServletException, IOException {
     
-        long jobID = Long.parseLong(parameters.getProperty("jobID"));
-        ImportingJob job = ImportingManager.getJob(jobID);
-        if (job == null) {
-            HttpUtilities.respond(response, "error", "No such import job");
-            return;
-        }
-        
-        job.updating = true;
-        try {
-            JSONObject config = job.getOrCreateDefaultConfig();
-            if (!("ready".equals(config.getString("state")))) {
-                HttpUtilities.respond(response, "error", "Job not ready");
-                return;
-            }
-            
-            JSONArray fileSelectionArray = ParsingUtilities.evaluateJsonStringToArray(
-                    request.getParameter("fileSelection"));
-            
-            ImportingUtilities.updateJobWithNewFileSelection(job, fileSelectionArray);
-            
-            replyWithJobData(request, response, job);
-        } catch (JSONException e) {
-            throw new ServletException(e);
-        } finally {
-            job.touch();
-            job.updating = false;
-        }
-    }
-    
-    private void doUpdateFormatAndOptions(HttpServletRequest request, HttpServletResponse response, Properties parameters)
-        throws ServletException, IOException {
-    
-        long jobID = Long.parseLong(parameters.getProperty("jobID"));
-        ImportingJob job = ImportingManager.getJob(jobID);
-        if (job == null) {
-            HttpUtilities.respond(response, "error", "No such import job");
-            return;
-        }
-        
-        job.updating = true;
-        try {
-            JSONObject config = job.getOrCreateDefaultConfig();
-            if (!("ready".equals(config.getString("state")))) {
-                HttpUtilities.respond(response, "error", "Job not ready");
-                return;
-            }
-            
-            String format = request.getParameter("format");
-            JSONObject optionObj = ParsingUtilities.evaluateJsonStringToObject(
-                    request.getParameter("options"));
-            
-            List<Exception> exceptions = new LinkedList<Exception>();
-            
-            ImportingUtilities.previewParse(job, format, optionObj, exceptions);
-            
-            Writer w = response.getWriter();
-            JSONWriter writer = new JSONWriter(w);
-            try {
-                writer.object();
-                if (exceptions.size() == 0) {
-                    job.project.update(); // update all internal models, indexes, caches, etc.
-                    
-                    writer.key("status"); writer.value("ok");
-                } else {
-                    writer.key("status"); writer.value("error");
-                    writer.key("errors");
-                    writer.array();
-                    writeErrors(writer, exceptions);
-                    writer.endArray();
-                }
-                writer.endObject();
-            } catch (JSONException e) {
-                throw new ServletException(e);
-            } finally {
-                w.flush();
-                w.close();
-            }
-        } catch (JSONException e) {
-            throw new ServletException(e);
-        } finally {
-            job.touch();
-            job.updating = false;
-        }
-    }
-    
-    private void doInitializeParserUI(HttpServletRequest request, HttpServletResponse response, Properties parameters)
-        throws ServletException, IOException {
-    
-        long jobID = Long.parseLong(parameters.getProperty("jobID"));
-        ImportingJob job = ImportingManager.getJob(jobID);
-        if (job == null) {
-            HttpUtilities.respond(response, "error", "No such import job");
-            return;
-        }
-        
-        String format = request.getParameter("format");
-        Format formatRecord = ImportingManager.formatToRecord.get(format);
-        if (formatRecord != null && formatRecord.parser != null) {
-            JSONObject options = formatRecord.parser.createParserUIInitializationData(
-                    job, ImportingUtilities.getSelectedFileRecords(job), format);
-            JSONObject result = new JSONObject();
-            JSONUtilities.safePut(result, "status", "ok");
-            JSONUtilities.safePut(result, "options", options);
-            
-            HttpUtilities.respond(response, result.toString());
-        } else {
-            HttpUtilities.respond(response, "error", "Unrecognized format or format has no parser");
-        }
-    }
-    
-    private void doCreateProject(HttpServletRequest request, HttpServletResponse response, Properties parameters)
-        throws ServletException, IOException {
-    
-        long jobID = Long.parseLong(parameters.getProperty("jobID"));
-        ImportingJob job = ImportingManager.getJob(jobID);
-        if (job == null) {
-            HttpUtilities.respond(response, "error", "No such import job");
-            return;
-        }
-        
-        job.updating = true;
-        job.touch();
-        try {
-            JSONObject config = job.getOrCreateDefaultConfig();
-            if (!("ready".equals(config.getString("state")))) {
-                HttpUtilities.respond(response, "error", "Job not ready");
-                return;
-            }
-            
-            String format = request.getParameter("format");
-            JSONObject optionObj = ParsingUtilities.evaluateJsonStringToObject(
-                    request.getParameter("options"));
-            
-            List<Exception> exceptions = new LinkedList<Exception>();
-            
-            Long projectID=ImportingUtilities.createProject(job, format, optionObj, exceptions, true);
-            Project pm = ProjectManager.singleton.getProject(projectID);
-			pm.getMetadata().setCustomMetadata("slctStudyTypes",job.config.getString("slctStudyTypes"));
-			pm.getMetadata().setCustomMetadata("metadataAttributes",job.config.getJSONObject("metadataAttributes").toString());
-			ProjectManager.singleton.ensureProjectSaved(projectID);		
-            
-            HttpUtilities.respond(response, "ok", "done");
-        } catch (JSONException e) {
-            throw new ServletException(e);
-        }
-    }
-
-    private void replyWithJobData(HttpServletRequest request, HttpServletResponse response, ImportingJob job)
-        throws ServletException, IOException {
-        
-        Writer w = response.getWriter();
-        JSONWriter writer = new JSONWriter(w);
-        try {
-            writer.object();
-            writer.key("code"); writer.value("ok");
-            writer.key("job"); job.write(writer, new Properties());
-            writer.endObject();
-        } catch (JSONException e) {
-            throw new ServletException(e);
-        } finally {
-            w.flush();
-            w.close();
-        }
-    }
+ 
+   
     
     static public void writeErrors(JSONWriter writer, List<Exception> exceptions) throws JSONException {
         for (Exception e : exceptions) {

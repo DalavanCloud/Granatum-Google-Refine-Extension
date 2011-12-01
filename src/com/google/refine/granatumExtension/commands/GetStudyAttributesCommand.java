@@ -33,8 +33,9 @@ public class GetStudyAttributesCommand extends Command {
             for (Iterator iterator = studyAttributes.iterator(); iterator.hasNext();) {
             	StudyAttribute attr =(StudyAttribute) iterator.next();
 				writer.object();
-            	writer.key("name"); writer.value(attr.getAttributeName().substring(attr.getAttributeName().lastIndexOf("/")+1));
+            	writer.key("name"); writer.value(attr.getAttributeName().substring(attr.getAttributeName().lastIndexOf("#")+1));
             	writer.key("range"); writer.value(attr.getAttributeRange());
+            	writer.key("input"); writer.value(attr.getInputType());
             	writer.endObject();
             }
             writer.endArray();

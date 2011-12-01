@@ -47,11 +47,11 @@ GranatumImportingHandler.prototype._initManualEntryFunctions = function(elmts) {
 	var table =$('#expirmentTable')[0];
 	var tr_coltitle=table.insertRow(0);
 	$(tr_coltitle.insertCell(0)).html("<span class='coltitlelbls'>Compound</span>");
-	$(tr_coltitle.insertCell(1)).html("<span class='coltitlelbls'>UUID</span>");
+	//$(tr_coltitle.insertCell(1)).html("<span class='coltitlelbls'></span>");
     var extraCols=elmts.noofcolumn.val();
     
     for(var j=1;j<=extraCols;j++){
-    	$(tr_coltitle.insertCell(j+1)).html('<span class="coltitlelbls"><input type="text" name="extraCol" id="extraCol_'+j+'" /></span>');
+    	$(tr_coltitle.insertCell(j)).html('<span class="coltitlelbls"><input type="text" class="col_title_form_complete" name="extraCol" id="extraCol_'+j+'" /></span>');
     }
 	
 	
@@ -62,12 +62,13 @@ GranatumImportingHandler.prototype._initManualEntryFunctions = function(elmts) {
 			'<input type="hidden" id="bioportal_preferred_name_compound_name_1" name="compound_name_bioportal_preferred_name" />'+
 			'<input type="hidden" id="bioportal_concept_id_compound_name_1" name="compound_name_bioportal_concept_id">'+
 			'<input type="hidden" id="bioportal_ontology_id_compound_name_1" name="compound_name_bioportal_ontology_id" >'+
-			'<input type="hidden" id="bioportal_full_id_compound_name_1" name="compound_name_bioportal_full_id">');
-	$(tr_record.insertCell(1)).html('<input type="text" disabled="disabled"  name="compound_uuid" id="compound_uuid_1" />');
+			'<input type="hidden" id="bioportal_full_id_compound_name_1" name="compound_name_bioportal_full_id">'+
+			'<input type="hidden"  name="compound_uuid" id="compound_uuid_1" />');
 	for(var j=1;j<=extraCols;j++){
-    	$(tr_record.insertCell(j+1)).html('<span class="coltitlelbls"><input type="text"  name="extraColVal_'+j+'" id="extraColVal_'+j+'_1"></span>');
+    	$(tr_record.insertCell(j)).html('<span class="coltitlelbls"><input type="text"   name="extraColVal_'+j+'" id="extraColVal_'+j+'_1"></span>');
     }
 	
+	col_title_autocomplete_setup_functions();
 	var tr_addbtn=table.insertRow(2);
 	$(tr_addbtn.insertCell(0)).html('<div><input type="button" id="btnAdd" bind="btnAdd" value="add" /></div>');
 	
@@ -100,10 +101,10 @@ GranatumImportingHandler.prototype._initManualEntryFunctions = function(elmts) {
      			'<input type="hidden" id="bioportal_preferred_name_compound_name_'+newNum+'" name="compound_name_bioportal_preferred_name" />'+
      			'<input type="hidden" id="bioportal_concept_id_compound_name_'+newNum+'" name="compound_name_bioportal_concept_id">'+
      			'<input type="hidden" id="bioportal_ontology_id_compound_name_'+newNum+'" name="compound_name_bioportal_ontology_id" >'+
-     			'<input type="hidden" id="bioportal_full_id_compound_name_'+newNum+'" name="compound_name_bioportal_full_id">');
-     	$(tr_record.insertCell(1)).html('<input type="text" disabled="disabled"  name="compound_uuid" id="compound_uuid_'+newNum+'" />');
+     			'<input type="hidden" id="bioportal_full_id_compound_name_'+newNum+'" name="compound_name_bioportal_full_id">'+
+     			'<input type="hidden"  name="compound_uuid" id="compound_uuid_'+newNum+'" />');
      	for(var j=1;j<=extraCols;j++){
-         	$(tr_record.insertCell(j+1)).html('<span class="coltitlelbls"><input type="text" name="extraColVal_'+j+'"  id="extraColVal_'+j+'_'+newNum+'"></span>');
+         	$(tr_record.insertCell(j)).html('<span class="coltitlelbls"><input type="text" name="extraColVal_'+j+'"  id="extraColVal_'+j+'_'+newNum+'"></span>');
          }
          formComplete_setup_functions();
 	  });

@@ -1,4 +1,4 @@
-
+/*
 function GranatumOperationsDialog() {
 
 	this._nodeUIs = [];
@@ -9,7 +9,7 @@ function GranatumOperationsDialog() {
 GranatumOperationsDialog.prototype._createDialog = function() {
 	var self = this;
 	var frame = DialogSystem.createDialog();
-    alert(jQuery.parseJSON(theProject.metadata.customMetadata.metadataAttributes));
+    alert(theProject.metadata.customMetadata.studyMetadata[0].slctStudyTypes);
 	frame.width("1000px");
 
 	var header = $('<div></div>').addClass("dialog-header").text(
@@ -35,7 +35,7 @@ GranatumOperationsDialog.prototype._constructFooter = function(footer) {
 
 				});
 				DialogSystem.dismissUntil(self._level - 1);
-				/**/
+				
 
 			}).appendTo(footer);
 
@@ -199,5 +199,5 @@ GranatumOperationsDialog.prototype._runOperation = function(oprID) {
 
 
 };
-/*
+
  */
