@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONWriter;
 
 import com.google.refine.commands.Command;
-import com.google.refine.granatumExtension.util.GranatumOntology;
-import com.google.refine.granatumExtension.util.StudyAttribute;
+
+import com.google.refine.granatumExtension.util.GranatumOntologyManager;
+
+import com.google.refine.granatumExtension.util.StudyMetadataAttribute;
 
 public class GetStudyAttributesCommand extends Command {
 
@@ -24,16 +26,17 @@ public class GetStudyAttributesCommand extends Command {
         response.setHeader("Content-Type", "application/json");
         try{
           
-          GranatumOntology granatumOntology=new GranatumOntology();
-          ArrayList<StudyAttribute> studyAttributes = granatumOntology.getStudyAttributes(selectedStudy);
+          GranatumOntologyManager granatumOntology=new GranatumOntologyManager();
+          ArrayList<StudyMetadataAttribute> studyAttributes = granatumOntology.getStudyAttributes(selectedStudy);
           JSONWriter writer = new JSONWriter(response.getWriter());
             writer.object();
             writer.key("attributes");
             writer.array();
             for (Iterator iterator = studyAttributes.iterator(); iterator.hasNext();) {
-            	StudyAttribute attr =(StudyAttribute) iterator.next();
+            	StudyMetadataAttribute attr =(StudyMetadataAttribute) iterator.next();
 				writer.object();
-            	writer.key("name"); writer.value(attr.getAttributeName().substring(attr.getAttributeName().lastIndexOf("#")+1));
+            	writer.key("name"); writer.value(attr.getLabel());
+            	writer.key("uri"); writer.value(attr.getAttributeURI());
             	writer.key("range"); writer.value(attr.getAttributeRange());
             	writer.key("input"); writer.value(attr.getInputType());
             	writer.endObject();

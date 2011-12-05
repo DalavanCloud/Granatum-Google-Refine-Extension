@@ -133,8 +133,8 @@ var granatumExtension = {};
 	    	var tr = table.insertRow(0);
 			$(tr.insertCell(0)).html("<span class='attributeslbls'>"+data.attributes[i].name+"</span>");
 			//FIXME :only for the Demo
-			if(data.attributes[i].name=="hasProtocol"){
-			var inputhtml=$('<select type="text" class="attributes" name='+data.attributes[i].name+' ><option value="Protocol1">Protocol 1</option><option value="Protocol2">Protocol 2</option><option value="Protocol3">Protocol 3</option></select>').appendTo(tr.insertCell(1));
+			if(data.attributes[i].input=="dropdown"){
+				var inputhtml=$('<select type="text" class="attributes" name='+data.attributes[i].name+' ><option value="'+data.attributes[i].name+'1">'+data.attributes[i].name+'1</option><option value="'+data.attributes[i].name+'2">'+data.attributes[i].name+'2</option><option value="'+data.attributes[i].name+'3">'+data.attributes[i].name+'3</option></select>').appendTo(tr.insertCell(1));	
 			}
 			else{
 			var inputhtml=$('<input type="text" name='+data.attributes[i].name+' />').addClass("attributes").appendTo(tr.insertCell(1));

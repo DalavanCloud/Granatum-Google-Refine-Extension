@@ -13,6 +13,33 @@
     "onError": "set-to-blank",
     "delay": 5000
   },
+   {
+    "op": "granatum/add-columns-by-fetching-urls-no-check",
+    "description": "Create column cma_uuid at index 1 by fetching URLs based on column Compound using expression grel:\"http://vmdhcls04.deri.ie/uuid.php\"",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "cma_uuid",
+    "columnInsertIndex": 1,
+    "baseColumnName": "Compound",
+    "urlExpression": "grel:\"http://vmdhcls04.deri.ie/uuid.php\"",
+    "onError": "set-to-blank",
+    "delay": 5000
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column cma_uuid using expression grel:replace(replace(value, \"\\\"\", \"\"), \"-\", \"\")",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "cma_uuid",
+    "expression": "grel:replace(replace(value, \"\\\"\", \"\"), \"-\", \"\")",
+    "onError": "set-to-blank",
+    "repeat": false,
+    "repeatCount": 10
+  },
   {
     "op": "core/text-transform",
     "description": "Text transform on cells in column bioassay_uuid using expression grel:replace(replace(value, \"\\\"\", \"\"), \"-\", \"\")",
@@ -28,7 +55,7 @@
   },
   {
     "op": "granatum/add-columns-by-fetching-urls-no-check",
-    "description": "Create column chemSpiderID2 at index 1 by fetching URLs based on column Compound using expression grel:\"http://hcls.deri.org/c2sma/chemSpiderProxy.php?service=SimpleSearch&label=\"+escape(value, 'url')+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
+    "description": "Create column chemSpiderID2 at index 1 by fetching URLs based on column Compound using expression grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=SimpleSearch&label=\"+escape(value, 'url')+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
     "engineConfig": {
       "facets": [],
       "mode": "row-based"
@@ -36,7 +63,7 @@
     "newColumnName": "chemSpiderID2",
     "columnInsertIndex": 1,
     "baseColumnName": "Compound",
-    "urlExpression": "grel:\"http://hcls.deri.org/c2sma/chemSpiderProxy.php?service=SimpleSearch&label=\"+escape(value, 'url')+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
+    "urlExpression": "grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=SimpleSearch&label=\"+escape(value, 'url')+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
     "onError": "set-to-blank",
     "delay": 5000
   },
@@ -55,7 +82,7 @@
   },
   {
     "op": "granatum/add-columns-by-fetching-urls-no-check",
-    "description": "Create column getCompoundInfo at index 2 by fetching URLs based on column chemSpiderID2 using expression grel:\"http://hcls.deri.org/c2sma/chemSpiderProxy.php?service=GetCompoundInfo&csid=\"+value+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
+    "description": "Create column getCompoundInfo at index 2 by fetching URLs based on column chemSpiderID2 using expression grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=GetCompoundInfo&csid=\"+value+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
     "engineConfig": {
       "facets": [],
       "mode": "row-based"
@@ -63,7 +90,7 @@
     "newColumnName": "getCompoundInfo",
     "columnInsertIndex": 2,
     "baseColumnName": "chemSpiderID2",
-    "urlExpression": "grel:\"http://hcls.deri.org/c2sma/chemSpiderProxy.php?service=GetCompoundInfo&csid=\"+value+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
+    "urlExpression": "grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=GetCompoundInfo&csid=\"+value+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
     "onError": "set-to-blank",
     "delay": 5000
   },
@@ -79,5 +106,601 @@
     "baseColumnName": "getCompoundInfo",
     "expression": "grel:value.parseJson()[1][\"SMILES\"][\"0\"]",
     "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column inchi at index 3 based on column getCompoundInfo using expression grel:value.parseJson()[1][\"InChI\"][\"0\"]",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "inchi",
+    "columnInsertIndex": 3,
+    "baseColumnName": "getCompoundInfo",
+    "expression": "grel:value.parseJson()[1][\"InChI\"][\"0\"]",
+    "onError": "set-to-blank"
+  },
+   {
+    "op": "core/column-addition",
+    "description": "Create column inchikey at index 3 based on column getCompoundInfo using expression grel:value.parseJson()[1][\"InChIKey\"][\"0\"]",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "inchikey",
+    "columnInsertIndex": 3,
+    "baseColumnName": "getCompoundInfo",
+    "expression": "grel:value.parseJson()[1][\"InChIKey\"][\"0\"]",
+    "onError": "set-to-blank"
+  }
+  ,
+  {
+    "op": "granatum/add-columns-by-fetching-urls-no-check",
+    "description": "Create column thumbnail at index 2 by fetching URLs based on column chemSpiderID2 using expression grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=GetCompoundThumbnail&csid=\"+value+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "thumbnail",
+    "columnInsertIndex": 2,
+    "baseColumnName": "chemSpiderID2",
+    "urlExpression": "grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=GetCompoundThumbnail&csid=\"+value+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
+    "onError": "set-to-blank",
+    "delay": 5000
+  }
+  ,
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column thumbnail using expression grel:if(value.parseJson()[0]==\"true\", value.parseJson()[1], \"\")",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "thumbnail",
+    "expression": "grel:if(value.parseJson()[0]==\"true\", value.parseJson()[1], \"\")",
+    "onError": "set-to-blank",
+    "repeat": false,
+    "repeatCount": 10
+  },
+   {
+    "op": "granatum/add-columns-by-fetching-urls-no-check",
+    "description": "Create column jonas at index 1 by fetching URLs based on column Compound using expression grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=SimpleSearch&label=\"+escape(value, \"url\")+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "jonas",
+    "columnInsertIndex": 1,
+    "baseColumnName": "Compound",
+    "urlExpression": "grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=SimpleSearch&label=\"+escape(value, \"url\")+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
+    "onError": "set-to-blank",
+    "delay": 5000
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column jonas using expression grel:value.parseJson()[1][\"0\"]",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "jonas",
+    "expression": "grel:value.parseJson()[1][\"0\"]",
+    "onError": "set-to-blank",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "granatum/add-columns-by-fetching-urls-no-check",
+    "description": "Create column CSID2ExtRDF at index 2 by fetching URLs based on column jonas using expression grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=CSID2ExtRefs&csid=\"+value+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "CSID2ExtRDF",
+    "columnInsertIndex": 2,
+    "baseColumnName": "jonas",
+    "urlExpression": "grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=CSID2ExtRefs&csid=\"+value+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
+    "onError": "set-to-blank",
+    "delay": 5000
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column CSID2ExtRDF using expression grel:value.parseJson()[1]",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "CSID2ExtRDF",
+    "expression": "grel:value.parseJson()[1]",
+    "onError": "set-to-blank",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/column-removal",
+    "description": "Remove column jonas",
+    "columnName": "jonas"
+  },
+   {
+    "op": "core/column-removal",
+    "description": "Remove column CSID2ExtRDF",
+    "columnName": "CSID2ExtRDF"
+  },
+  {
+    "op": "granatum/add-columns-by-fetching-urls-no-check",
+    "description": "Create column CSID2ExtRef at index 2 by fetching URLs based on column chemSpiderID2 using expression grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=CSID2ExtRefs&csid=\"+value+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "CSID2ExtRef",
+    "columnInsertIndex": 2,
+    "baseColumnName": "chemSpiderID2",
+    "urlExpression": "grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=CSID2ExtRefs&csid=\"+value+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
+    "onError": "set-to-blank",
+    "delay": 5000
+  },
+   {
+    "op": "granatum/add-columns-by-fetching-urls-no-check",
+    "description": "Create column sdfile at index 8 by fetching URLs based on column SMILES_by_ChemSpider using expression grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=cactus&smiles=\"+value",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "sdfile",
+    "columnInsertIndex": 8,
+    "baseColumnName": "SMILES_by_ChemSpider",
+    "urlExpression": "grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=cactus&smiles=\"+value",
+    "onError": "set-to-blank",
+    "delay": 5000
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column sdfile using expression grel:value.parseJson()[1]",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "sdfile",
+    "expression": "grel:value.parseJson()[1]",
+    "onError": "set-to-blank",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://chem.deri.ie/granatum/",
+      "prefixes": [
+        {
+          "name": "dc",
+          "uri": "http://purl.org/dc/terms/"
+        },
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "drugbank",
+          "uri": "http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugbank/"
+        },
+        {
+          "name": "s3db",
+          "uri": "http://www.s3db.org/core#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "granatum",
+          "uri": "http://granatum.org/schema/"
+        },
+        {
+          "name": "efo",
+          "uri": "http://efo.svn.sourceforge.net/svnroot/efo/trunk/src/efoinowl/efo.owl"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "b2rpubchem",
+          "uri": "http://bio2rdf.org/ns/ns/ns/pubchem#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "resource",
+          "value": "http://chem.deri.ie/granatum/study_75307c70b94a4b0dcb30cb28b7220ac3",
+          "rdfTypes": [
+            {
+              "uri": "http://granatum.org/schema/Study",
+              "curie": "granatum:Study"
+            },
+            {
+              "uri": "http://granatum.org/schema/chemoPreventionStudy",
+              "curie": "granatum:chemoPreventionStudy"
+            },
+            {
+              "uri": "http://www.s3db.org/core#item",
+              "curie": "s3db:item"
+            }
+          ],
+          "links": [
+            {
+              "uri": "study_reference",
+              "curie": "granatum:study_reference",
+              "target": {
+                "nodeType": "resource",
+                "value": "http://www.ncbi.nlm.nih.gov/pubmed/12628514",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "author",
+              "curie": "granatum:author",
+              "target": {
+                "nodeType": "literal",
+                "value": "Clarissa Gerhäuser"
+              }
+            },
+            {
+              "uri": "http://purl.org/dc/terms/hasPart",
+              "curie": "dc:hasPart",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "\"http://chem.deri.ie/granatum/bioassay_\"+value",
+                "isRowNumberCell": false,
+                "columnName": "bioassay_uuid",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "measures",
+              "curie": "granatum:measures",
+              "target": {
+                "nodeType": "resource",
+                "value": "http://bio2rdf.org/go:0003960",
+                "rdfTypes": [
+                  {
+                    "uri": "http://granatum.org/schema/goURI",
+                    "curie": "granatum:goURI"
+                  }
+                ],
+                "links": []
+              }
+            },
+            {
+              "uri": "measures",
+              "curie": "granatum:measures",
+              "target": {
+                "nodeType": "resource",
+                "value": "http://bio2rdf.org/go:0015034",
+                "rdfTypes": [
+                  {
+                    "uri": "http://granatum.org/schema/goURI",
+                    "curie": "granatum:goURI"
+                  }
+                ],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://purl.org/dc/terms/accessRights",
+              "curie": "dc:accessRights",
+              "target": {
+                "nodeType": "resource",
+                "value": "http://chem.deri.ie/granatum/schema/public_resource",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2002/07/owl#sameAs",
+              "curie": "owl:sameAs",
+              "target": {
+                "nodeType": "resource",
+                "value": "http://linkedlifedata.com/resource/pubmed/id/12628514",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "\"http://chem.deri.ie/granatum/bioassay_\"+value",
+          "isRowNumberCell": false,
+          "columnName": "bioassay_uuid",
+          "rdfTypes": [
+            {
+              "uri": "http://granatum.org/schema/Bioassay",
+              "curie": "granatum:Bioassay"
+            },
+            {
+              "uri": "http://www.s3db.org/core#item",
+              "curie": "s3db:item"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://granatum.org/schema/used_cma",
+              "curie": "granatum:used_cma",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "\"http://chem.deri.ie/granatum/cma_\"+value",
+                "isRowNumberCell": false,
+                "columnName": "cma_uuid_used",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://granatum.org/schema/iNOS_induction_inhibition_A_IC50",
+              "curie": "granatum:iNOS_induction_inhibition_A_IC50",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://purl.org/obo/owl/UO#UO_0000064",
+                "columnName": "Inhibition of iNOS induction  A-IC50 [µM]a"
+              }
+            },
+            {
+              "uri": "http://granatum.org/schema/iNOS_induction_inhibition_T_IC50",
+              "curie": "granatum:iNOS_induction_inhibition_T_IC50",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://purl.org/obo/owl/UO#UO_0000064",
+                "columnName": "Inhibition of iNOS induction  A-IC50 [µM]a T-IC50 [µM]b"
+              }
+            },
+            {
+              "uri": "http://granatum.org/schema/cox1_inhibtion",
+              "curie": "granatum:cox1_inhibtion",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://purl.org/obo/owl/UO#UO_0000064",
+                "columnName": "Cox-1 inhibition IC50 [µM]"
+              }
+            },
+            {
+              "uri": "http://granatum.org/schema/OCD_induction_inhibition_IC50",
+              "curie": "granatum:OCD_induction_inhibition_IC50",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://purl.org/obo/owl/UO#UO_0000064",
+                "columnName": "Inhibition of ODC induction IC50 [µM]"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "\"http://chem.deri.ie/granatum/cma_\"+value",
+          "isRowNumberCell": false,
+          "columnName": "cma_uuid_used",
+          "rdfTypes": [
+            {
+              "uri": "http://granatum.org/schema/ChemopreventiveAgent",
+              "curie": "granatum:ChemopreventiveAgent"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+              "curie": "rdfs:label",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "Compound"
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2002/07/owl#sameAs",
+              "curie": "owl:sameAs",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "Chebi",
+                "rdfTypes": [
+                  {
+                    "uri": "http://granatum.org/schema/chebiURI",
+                    "curie": "granatum:chebiURI"
+                  }
+                ],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://bio2rdf.org/ns/ns/ns/pubchem#SMILES",
+              "curie": "b2rpubchem:SMILES",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "SMILES_by_ChemSpider"
+              }
+            },
+            {
+              "uri": "http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugbank/smilesStringCanonical",
+              "curie": "drugbank:smilesStringCanonical",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "SMILES_by_ChemSpider"
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#seeAlso",
+              "curie": "rdfs:seeAlso",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "seeAlso",
+                "rdfTypes": [
+                  {
+                    "uri": "http://granatum.org/schema/chemSpiderURL",
+                    "curie": "granatum:chemSpiderURL"
+                  }
+                ],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2002/07/owl#sameAs",
+              "curie": "owl:sameAs",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "PubChem",
+                "rdfTypes": [
+                  {
+                    "uri": "http://granatum.org/schema/pubchemURI",
+                    "curie": "granatum:pubchemURI"
+                  }
+                ],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2002/07/owl#sameAs",
+              "curie": "owl:sameAs",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "Drugbank",
+                "rdfTypes": [
+                  {
+                    "uri": "http://granatum.org/schema/drugbankURI",
+                    "curie": "granatum:drugbankURI"
+                  }
+                ],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2002/07/owl#sameAs",
+              "curie": "owl:sameAs",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "kegg",
+                "rdfTypes": [
+                  {
+                    "uri": "http://granatum.org/schema/keggURI",
+                    "curie": "granatum:keggURI"
+                  }
+                ],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#seeAlso",
+              "curie": "rdfs:seeAlso",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "\"http://www.chemspider.com/Chemical-Structure.\"+value+\".html\"",
+                "isRowNumberCell": false,
+                "columnName": "chemSpiderID2",
+                "rdfTypes": [
+                  {
+                    "uri": "http://granatum.org/schema/chemSpiderURL",
+                    "curie": "granatum:chemSpiderURL"
+                  }
+                ],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2002/07/owl#sameAs",
+              "curie": "owl:sameAs",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "\"http://www.chemspider.com/Chemical-Structure.\"+value+\".rdf\"",
+                "isRowNumberCell": false,
+                "columnName": "chemSpiderID2",
+                "rdfTypes": [
+                  {
+                    "uri": "http://granatum.org/schema/chemSpiderURI",
+                    "curie": "granatum:chemSpiderURI"
+                  }
+                ],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugbank/inchiKey",
+              "curie": "drugbank:inchiKey",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "inchikey"
+              }
+            },
+            {
+              "uri": "http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugbank/inchiIdentifier",
+              "curie": "drugbank:inchiIdentifier",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "inchi"
+              }
+            },
+            {
+              "uri": "http://granatum.org/schema/thumbnail",
+              "curie": "granatum:thumbnail",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "thumbnail",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://granatum.org/schema/sdf_file",
+              "curie": "granatum:sdf_file",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "sdfile",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        }
+      ]
+    }
   }
 ]
