@@ -89,13 +89,14 @@ RefineServlet.cacheClass(Packages.com.google.refine.rdf.operations.SaveRdfSchema
       "styles/project-injection.less"
     ]
   );
-  RefineServlet.registerCommand(module, "project-json", new Packages.com.google.refine.granatumExtension.commands.JsonProjectCommand());
-  RefineServlet.registerCommand(module, "add-column-by-fetching-urls-ex", new Packages.com.google.refine.granatumExtension.commands.column.AddColumnByFetchingURLsCommand());
+  
+  
   RefineServlet.registerCommand(module, "granatum-get-study-types", new Packages.com.google.refine.granatumExtension.commands.GetStudyTypesCommand());
   RefineServlet.registerCommand(module, "granatum-get-study-attributes", new Packages.com.google.refine.granatumExtension.commands.GetStudyAttributesCommand());
   RefineServlet.registerCommand(module, "granatum-save-metadata", new Packages.com.google.refine.granatumExtension.commands.SaveStudyMetadataCommand());
   RefineServlet.registerCommand(module, "granatum-get-metadata", new Packages.com.google.refine.granatumExtension.commands.GetStudyMetadataCommand());
-  RefineServlet.registerCommand(module, "granatum-apply-operations", new Packages.com.google.refine.granatumExtension.commands.ApplyGranatumOperationsCommand());
+  RefineServlet.registerCommand(module, "granatum-apply-column-operations", new Packages.com.google.refine.granatumExtension.commands.ApplyGranatumColumnOperationsCommand());
+  RefineServlet.registerCommand(module, "granatum-apply-rdf-operations", new Packages.com.google.refine.granatumExtension.commands.ApplyGranatumRDFOperationsCommand());
   var IM = Packages.com.google.refine.importing.ImportingManager;
   
   IM.registerController(

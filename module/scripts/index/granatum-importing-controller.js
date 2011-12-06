@@ -50,12 +50,11 @@ Refine.GranatumDefaultImportingController.prototype._startOver= Refine.DefaultIm
 
 Refine.GranatumDefaultImportingController.prototype.startImportJob = function(form, progressMessage, callback) {
 	  var self = this;
-	  var attrJSON = {"attributes": {}};
-	   for(var i=0; i< $('.attributes').length;i++){
-	    attrJSON.attributes[$('.attributes')[i].name]=$('.attributes')[i].value;
+	  var attrjson = {};
+	    for(var i=0; i<$('.attributes').length; i++) {
+	    	attrjson[$('.attributes')[i].name]=$('.attributes')[i].value;
 	    }
-	 
-	  $.post(
+	   	$.post(
 	      "/command/core/create-importing-job",
 	      null,
 	      function(data) {
@@ -69,8 +68,8 @@ Refine.GranatumDefaultImportingController.prototype.startImportJob = function(fo
 	          "controller": "granatum/granatum-importing-controller",
 	          "jobID": jobID,
 	          "subCommand": "load-raw-data",
-	          "slctStudyTypes" : $('#slctStudyTypes').val(),
-	          "metadataAttributes" :JSON.stringify(attrJSON)
+	          "slctStudyType" : $('#slctStudyTypes').val(),
+	          "metadataAttributes" :JSON.stringify(attrjson)
 	        }));
 	        form[0].submit();
 
@@ -175,8 +174,8 @@ Refine.GranatumDefaultImportingController.prototype._createProject = function() 
 		                	  data: $.param({
 		            		        "project": job.config.projectID,
 		            		        "subCommand": "save-metadata",
-		            		    	"slctStudyTypes" : job.config.slctStudyTypes,
-		            		        "metadataAttributes" :JSON.stringify(job.config.metadataAttributes),
+		            		    	"slctStudyType" : job.config.slctStudyType,
+		            		        "metadataAttributes" :job.config.metadataAttributes,
 		            		        "source":"granatum",
 		            		        "initial": "yes"
 		            		      }),

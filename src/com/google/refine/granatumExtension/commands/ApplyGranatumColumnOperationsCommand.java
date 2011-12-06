@@ -26,7 +26,7 @@ import com.google.refine.operations.OperationRegistry;
 import com.google.refine.process.Process;
 import com.google.refine.util.ParsingUtilities;
 
-public class ApplyGranatumOperationsCommand extends ApplyOperationsCommand {
+public class ApplyGranatumColumnOperationsCommand extends ApplyOperationsCommand {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -37,6 +37,7 @@ public class ApplyGranatumOperationsCommand extends ApplyOperationsCommand {
 		try {
 			JSONArray a = ParsingUtilities
 					.evaluateJsonStringToArray(jsonString);
+			
 			int count = a.length();
 			for (int i = 0; i < count; i++) {
 				JSONObject obj = a.getJSONObject(i);
@@ -61,7 +62,7 @@ public class ApplyGranatumOperationsCommand extends ApplyOperationsCommand {
 		StringBuffer buffer=new StringBuffer();
 		try {
 			// create FileInputStream object
-			InputStream fin = this.getClass().getResourceAsStream("/files/jsonop2");
+			InputStream fin = this.getClass().getResourceAsStream("/files/columns.operations");
 
 			// create object of BufferedInputStream
 			bin = new BufferedInputStream(fin);

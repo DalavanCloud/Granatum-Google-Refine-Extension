@@ -120,9 +120,9 @@ public class GranatumDefaultImportingController implements ImportingController {
             ImportingUtilities.loadDataAndPrepareJob(
                 request, response, parameters, job, config);
             //save custom metadata Temproray in the job.config
-            JSONUtilities.safePut(config, "slctStudyTypes", parameters.getProperty("slctStudyTypes"));
-            JSONObject attributes=new JSONObject(parameters.getProperty("metadataAttributes"));
-            JSONUtilities.safePut(config, "metadataAttributes", attributes);
+            JSONUtilities.safePut(config, "slctStudyType", parameters.getProperty("slctStudyType"));
+           // JSONObject attributes=new JSONObject();
+            JSONUtilities.safePut(config, "metadataAttributes", parameters.getProperty("metadataAttributes"));
         } catch (JSONException e) {
             throw new ServletException(e);
         } finally {

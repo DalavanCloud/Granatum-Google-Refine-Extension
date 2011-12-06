@@ -1,7 +1,7 @@
 //---------------------
 $.post("/command/granatum/granatum-get-metadata?" + $.param( {
 	"project" : theProject.id,
-	"keys" : "slctStudyTypes,metadataAttributes,source,initial"
+	"keys" : "slctStudyType,metadataAttributes,source,initial"
 }), {
 
 }, function(data) {
@@ -9,7 +9,7 @@ $.post("/command/granatum/granatum-get-metadata?" + $.param( {
 
 	controller.setupOperations(data.customMetadata);
 
-});
+},"json");
 //---------------------
 
 GranatumSetupController = function() {
@@ -35,9 +35,23 @@ GranatumSetupController.prototype.setupOperations = function(data) {
 
 			if (compoundExists) {
 				if (data.initial == "yes") {
+					// ---------------------
+					$.post("/command/granatum/granatum-save-metadata?"
+							+ $.param( {
+								"project" : theProject.id,
+								"subCommand" : "save-metadata",
+								"slctStudyType" : data.slctStudyType,
+								"metadataAttributes" : data.metadataAttributes,
+								"source" : "granatum",
+								"initial" : "no"
+							}), {
+								
+							}, function(o) {
+							});
+					// ---------------------
 
 				
-					 Refine.postProcess("granatum", "granatum-apply-operations",
+					 Refine.postProcess("granatum", "granatum-apply-column-operations",
 							{
 								"project" : theProject.id
 							}, {}, {
@@ -56,22 +70,29 @@ GranatumSetupController.prototype.setupOperations = function(data) {
 					
 				
 					// ---------------------
-					// ---------------------
-					$.post("/command/granatum/granatum-save-metadata?"
-							+ $.param( {
-								"project" : theProject.id,
-								"subCommand" : "save-metadata",
-								"slctStudyTypes" : data.slctStudyTypes,
-								"metadataAttributes" : JSON
-								.stringify(data.metadataAttributes),
-								"source" : "granatum",
-								"initial" : "no"
-							}), {
-								
-							}, function(o) {
-							});
-					// ---------------------
+					// Apply RDF operations	
 
+						
+					 Refine.postProcess("granatum", "granatum-apply-rdf-operations",
+							{
+								"project" : theProject.id
+							}, {}, {
+								everythingChanged : true
+							}, {
+								onDone : function(o) {
+									if (o.code == "pending") {
+										// Something might have already been
+										// done and so it's good to update
+							Refine.update( {
+								everythingChanged : true
+							});
+						}
+					}
+				}	);
+					
+				
+					// --------------------- 
+					
 				} else {
 					//alert("Second time");
 				}

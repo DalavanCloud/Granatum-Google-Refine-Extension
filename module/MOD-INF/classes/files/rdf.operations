@@ -1,4 +1,5 @@
 [
+ 
   {
     "op": "rdf-extension/save-rdf-schema",
     "description": "Save RDF schema skeleton",
@@ -60,8 +61,8 @@
               "curie": "granatum:Study"
             },
             {
-              "uri": "http://granatum.org/schema/chemoPreventionStudy",
-              "curie": "granatum:chemoPreventionStudy"
+              "uri": "{STUDY_URI}",
+              "curie": "{STUDY_CURIE}"
             },
             {
               "uri": "http://www.s3db.org/core#item",
@@ -74,7 +75,7 @@
               "curie": "granatum:study_reference",
               "target": {
                 "nodeType": "resource",
-                "value": "http://www.ncbi.nlm.nih.gov/pubmed/12628514",
+                "value": "{STUDY_REF}",
                 "rdfTypes": [],
                 "links": []
               }
@@ -84,7 +85,7 @@
               "curie": "granatum:author",
               "target": {
                 "nodeType": "literal",
-                "value": "Clarissa Gerhäuser"
+                "value": "{AUTHOR}"
               }
             },
             {
@@ -104,7 +105,7 @@
               "curie": "granatum:measures",
               "target": {
                 "nodeType": "resource",
-                "value": "http://bio2rdf.org/go:0003960",
+                "value": "{MEASURES}",
                 "rdfTypes": [
                   {
                     "uri": "http://granatum.org/schema/goURI",
@@ -134,7 +135,7 @@
               "curie": "dc:accessRights",
               "target": {
                 "nodeType": "resource",
-                "value": "http://chem.deri.ie/granatum/schema/public_resource",
+                "value": "{ACCESS_RIGHTS}",
                 "rdfTypes": [],
                 "links": []
               }
@@ -144,7 +145,7 @@
               "curie": "owl:sameAs",
               "target": {
                 "nodeType": "resource",
-                "value": "http://linkedlifedata.com/resource/pubmed/id/12628514",
+                "value": "{SAME_AS}",
                 "rdfTypes": [],
                 "links": []
               }

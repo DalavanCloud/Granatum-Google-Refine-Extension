@@ -1,6 +1,7 @@
 package com.google.refine.granatumExtension.commands;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Enumeration;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.refine.ProjectManager;
 import com.google.refine.ProjectMetadata;
 import com.google.refine.commands.Command;
+import com.google.refine.util.ParsingUtilities;
 
 public class SaveStudyMetadataCommand extends Command {
 
@@ -20,8 +22,8 @@ public class SaveStudyMetadataCommand extends Command {
 
 		  try {
 	          ProjectMetadata pm = getProjectMetadata(request);
-	      	  pm.setCustomMetadata("slctStudyTypes",request.getParameter("slctStudyTypes"));
-	      	  pm.setCustomMetadata("metadataAttributes",request.getParameter("metadataAttributes"));		
+	      	  pm.setCustomMetadata("slctStudyType",request.getParameter("slctStudyType"));
+	      	  pm.setCustomMetadata("metadataAttributes", request.getParameter("metadataAttributes"));		
 	      	  pm.setCustomMetadata("source",request.getParameter("source"));
 	      	  pm.setCustomMetadata("initial",request.getParameter("initial"));
 	          long projectID=getProject(request).id;

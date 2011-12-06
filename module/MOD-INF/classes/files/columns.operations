@@ -1,0 +1,270 @@
+[
+  {
+    "op": "granatum/add-columns-by-fetching-urls-no-check",
+    "description": "Create column bioassay_uuid at index 1 by fetching URLs based on column Compound using expression grel:\"http://vmdhcls04.deri.ie/uuid.php\"",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "bioassay_uuid",
+    "columnInsertIndex": 1,
+    "baseColumnName": "Compound",
+    "urlExpression": "grel:\"http://vmdhcls04.deri.ie/uuid.php\"",
+    "onError": "set-to-blank",
+    "delay": 5000
+  },
+   {
+    "op": "granatum/add-columns-by-fetching-urls-no-check",
+    "description": "Create column cma_uuid at index 1 by fetching URLs based on column Compound using expression grel:\"http://vmdhcls04.deri.ie/uuid.php\"",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "cma_uuid",
+    "columnInsertIndex": 1,
+    "baseColumnName": "Compound",
+    "urlExpression": "grel:\"http://vmdhcls04.deri.ie/uuid.php\"",
+    "onError": "set-to-blank",
+    "delay": 5000
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column cma_uuid using expression grel:replace(replace(value, \"\\\"\", \"\"), \"-\", \"\")",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "cma_uuid",
+    "expression": "grel:replace(replace(value, \"\\\"\", \"\"), \"-\", \"\")",
+    "onError": "set-to-blank",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column bioassay_uuid using expression grel:replace(replace(value, \"\\\"\", \"\"), \"-\", \"\")",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "bioassay_uuid",
+    "expression": "grel:replace(replace(value, \"\\\"\", \"\"), \"-\", \"\")",
+    "onError": "set-to-blank",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "granatum/add-columns-by-fetching-urls-no-check",
+    "description": "Create column chemSpiderID2 at index 1 by fetching URLs based on column Compound using expression grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=SimpleSearch&label=\"+escape(value, 'url')+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "chemSpiderID2",
+    "columnInsertIndex": 1,
+    "baseColumnName": "Compound",
+    "urlExpression": "grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=SimpleSearch&label=\"+escape(value, 'url')+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
+    "onError": "set-to-blank",
+    "delay": 5000
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column chemSpiderID2 using expression grel:if(value.parseJson()[0]==\"true\", value.parseJson()[1][\"0\"], \"\")",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "chemSpiderID2",
+    "expression": "grel:if(value.parseJson()[0]==\"true\", value.parseJson()[1][\"0\"], \"\")",
+    "onError": "set-to-blank",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "granatum/add-columns-by-fetching-urls-no-check",
+    "description": "Create column getCompoundInfo at index 2 by fetching URLs based on column chemSpiderID2 using expression grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=GetCompoundInfo&csid=\"+value+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "getCompoundInfo",
+    "columnInsertIndex": 2,
+    "baseColumnName": "chemSpiderID2",
+    "urlExpression": "grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=GetCompoundInfo&csid=\"+value+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
+    "onError": "set-to-blank",
+    "delay": 5000
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column SMILES_by_ChemSpider at index 3 based on column getCompoundInfo using expression grel:value.parseJson()[1][\"SMILES\"][\"0\"]",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "SMILES_by_ChemSpider",
+    "columnInsertIndex": 3,
+    "baseColumnName": "getCompoundInfo",
+    "expression": "grel:value.parseJson()[1][\"SMILES\"][\"0\"]",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column inchi at index 3 based on column getCompoundInfo using expression grel:value.parseJson()[1][\"InChI\"][\"0\"]",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "inchi",
+    "columnInsertIndex": 3,
+    "baseColumnName": "getCompoundInfo",
+    "expression": "grel:value.parseJson()[1][\"InChI\"][\"0\"]",
+    "onError": "set-to-blank"
+  },
+   {
+    "op": "core/column-addition",
+    "description": "Create column inchikey at index 3 based on column getCompoundInfo using expression grel:value.parseJson()[1][\"InChIKey\"][\"0\"]",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "inchikey",
+    "columnInsertIndex": 3,
+    "baseColumnName": "getCompoundInfo",
+    "expression": "grel:value.parseJson()[1][\"InChIKey\"][\"0\"]",
+    "onError": "set-to-blank"
+  }
+  ,
+  {
+    "op": "granatum/add-columns-by-fetching-urls-no-check",
+    "description": "Create column thumbnail at index 2 by fetching URLs based on column chemSpiderID2 using expression grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=GetCompoundThumbnail&csid=\"+value+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "thumbnail",
+    "columnInsertIndex": 2,
+    "baseColumnName": "chemSpiderID2",
+    "urlExpression": "grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=GetCompoundThumbnail&csid=\"+value+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
+    "onError": "set-to-blank",
+    "delay": 5000
+  }
+  ,
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column thumbnail using expression grel:if(value.parseJson()[0]==\"true\", value.parseJson()[1], \"\")",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "thumbnail",
+    "expression": "grel:if(value.parseJson()[0]==\"true\", value.parseJson()[1], \"\")",
+    "onError": "set-to-blank",
+    "repeat": false,
+    "repeatCount": 10
+  },
+   {
+    "op": "granatum/add-columns-by-fetching-urls-no-check",
+    "description": "Create column jonas at index 1 by fetching URLs based on column Compound using expression grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=SimpleSearch&label=\"+escape(value, \"url\")+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "jonas",
+    "columnInsertIndex": 1,
+    "baseColumnName": "Compound",
+    "urlExpression": "grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=SimpleSearch&label=\"+escape(value, \"url\")+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
+    "onError": "set-to-blank",
+    "delay": 5000
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column jonas using expression grel:value.parseJson()[1][\"0\"]",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "jonas",
+    "expression": "grel:value.parseJson()[1][\"0\"]",
+    "onError": "set-to-blank",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "granatum/add-columns-by-fetching-urls-no-check",
+    "description": "Create column CSID2ExtRDF at index 2 by fetching URLs based on column jonas using expression grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=CSID2ExtRefs&csid=\"+value+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "CSID2ExtRDF",
+    "columnInsertIndex": 2,
+    "baseColumnName": "jonas",
+    "urlExpression": "grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=CSID2ExtRefs&csid=\"+value+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
+    "onError": "set-to-blank",
+    "delay": 5000
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column CSID2ExtRDF using expression grel:value.parseJson()[1]",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "CSID2ExtRDF",
+    "expression": "grel:value.parseJson()[1]",
+    "onError": "set-to-blank",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/column-removal",
+    "description": "Remove column jonas",
+    "columnName": "jonas"
+  },
+   {
+    "op": "core/column-removal",
+    "description": "Remove column CSID2ExtRDF",
+    "columnName": "CSID2ExtRDF"
+  },
+  {
+    "op": "granatum/add-columns-by-fetching-urls-no-check",
+    "description": "Create column CSID2ExtRef at index 2 by fetching URLs based on column chemSpiderID2 using expression grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=CSID2ExtRefs&csid=\"+value+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "CSID2ExtRef",
+    "columnInsertIndex": 2,
+    "baseColumnName": "chemSpiderID2",
+    "urlExpression": "grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=CSID2ExtRefs&csid=\"+value+\"&token=2913cb9b-a281-4752-b582-5fe15a663884\"",
+    "onError": "set-to-blank",
+    "delay": 5000
+  },
+   {
+    "op": "granatum/add-columns-by-fetching-urls-no-check",
+    "description": "Create column sdfile at index 8 by fetching URLs based on column SMILES_by_ChemSpider using expression grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=cactus&smiles=\"+value",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "sdfile",
+    "columnInsertIndex": 8,
+    "baseColumnName": "SMILES_by_ChemSpider",
+    "urlExpression": "grel:\"http://srvgal78.deri.ie/c2sma/chemSpiderProxy.php?service=cactus&smiles=\"+value",
+    "onError": "set-to-blank",
+    "delay": 5000
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column sdfile using expression grel:value.parseJson()[1]",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "sdfile",
+    "expression": "grel:value.parseJson()[1]",
+    "onError": "set-to-blank",
+    "repeat": false,
+    "repeatCount": 10
+  }
+]

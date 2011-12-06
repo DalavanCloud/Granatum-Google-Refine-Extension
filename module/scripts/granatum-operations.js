@@ -9,7 +9,7 @@ function GranatumOperationsDialog() {
 GranatumOperationsDialog.prototype._createDialog = function() {
 	var self = this;
 	var frame = DialogSystem.createDialog();
-    alert(theProject.metadata.customMetadata.studyMetadata[0].slctStudyTypes);
+    alert(theProject.metadata.customMetadata.studyMetadata[0].slctStudyType);
 	frame.width("1000px");
 
 	var header = $('<div></div>').addClass("dialog-header").text(
