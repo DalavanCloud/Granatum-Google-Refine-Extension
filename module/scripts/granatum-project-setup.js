@@ -61,9 +61,7 @@ GranatumSetupController.prototype.setupOperations = function(data) {
 									if (o.code == "pending") {
 										// Something might have already been
 										// done and so it's good to update
-							Refine.update( {
-								everythingChanged : true
-							});
+							Refine.update( {						everythingChanged : true							});
 						}
 					}
 				}	);
@@ -83,9 +81,9 @@ GranatumSetupController.prototype.setupOperations = function(data) {
 									if (o.code == "pending") {
 										// Something might have already been
 										// done and so it's good to update
-							Refine.update( {
-								everythingChanged : true
-							});
+										/*Refine.update( {
+											everythingChanged : true
+										});*/
 						}
 					}
 				}	);
