@@ -1,44 +1,6 @@
 <?xml version="1.0"?>
 
 
-<!DOCTYPE rdf:RDF [
-    <!ENTITY dbpedia "http://dbpedia.org/" >
-    <!ENTITY s3db "http://s3db.org/core#" >
-    <!ENTITY go "http://go.bio2rdf.org/" >
-    <!ENTITY p1 "http://granatum.org/ns/" >
-    <!ENTITY owl2 "www.w3.org/2002/07/owl#" >
-    <!ENTITY kegg "http://kegg.bio2rdf.org/" >
-    <!ENTITY void2 "http://rdfs.org/ns/void#" >
-    <!ENTITY terms "http://purl.org/dc/terms/" >
-    <!ENTITY efo "http://www.ebi.ac.uk/efo/" >
-    <!ENTITY chebi "http://chebi.bio2rdf.org/" >
-    <!ENTITY linkedlifedata "http://linkedlifedata.com/" >
-    <!ENTITY UO "http://purl.org/obo/owl/UO#" >
-    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
-    <!ENTITY bio2rdf "http://bio2rdf.org/ns/bio2rdf#" >
-    <!ENTITY acgt "http://www.ifomis.org/acgt/1.0#" >
-    <!ENTITY swrl "http://www.w3.org/2003/11/swrl#" >
-    <!ENTITY obo "http://purl.obolibrary.org/obo/" >
-    <!ENTITY swrlb "http://www.w3.org/2003/11/swrlb#" >
-    <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
-    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
-    <!ENTITY snap "http://www.ifomis.org/bfo/1.1/snap#" >
-    <!ENTITY rdf-syntax-ns "www.w3.org/1999/02/22-rdf-syntax-ns#" >
-    <!ENTITY skos "http://www.w3.org/2004/02/skos/core#" >
-    <!ENTITY pubchem2 "http://bio2rdf.org/ns/ns/ns/pubchem#" >
-    <!ENTITY EFO_0000311 "http://www.ebi.ac.uk/efo/EFO_0000311#" >
-    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
-    <!ENTITY drugbank "http://www4.wiwiss.fu-berlin.de/drugbank/" >
-    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
-    <!ENTITY protege "http://protege.stanford.edu/plugins/owl/protege#" >
-    <!ENTITY xsp "http://www.owl-ontologies.com/2005/08/07/xsp.owl#" >
-    <!ENTITY owl3 "http://granatum.org/schema/www.w3.org/2002/07/owl#" >
-    <!ENTITY ncithesaurus "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#" >
-    <!ENTITY void "http://granatum.org/schema/http://rdfs.org/ns/void#" >
-    <!ENTITY pubchem "http://granatum.org/schema/http://pubchem.bio2rdf.org/" >
-    <!ENTITY rdf-syntax-ns2 "http://granatum.org/schema/www.w3.org/1999/02/22-rdf-syntax-ns#" >
-]>
-
 
 <rdf:RDF xmlns="http://granatum.org/schema/"
      xml:base="http://granatum.org/schema/"

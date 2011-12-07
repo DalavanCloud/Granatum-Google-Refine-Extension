@@ -38,7 +38,7 @@ public class ApplyGranatumRDFOperationsCommand extends Command {
 			jsonString=addStudyMetadataOperations(jsonString, project);
 			JSONArray a = ParsingUtilities
 					.evaluateJsonStringToArray(jsonString);
-			//addStudyMetadataOperations(project,a);
+			
 			// Constructing defualt rdf operations.
 			int count = a.length();
 			for (int i = 0; i < count; i++) {
