@@ -166,7 +166,7 @@ Refine.GranatumDefaultImportingController.prototype._createProject = function() 
 		                  return "projectID" in job.config;
 		                },
 		                function(jobID, job) {
-		                  Refine.CreateProjectUI.cancelImportinJob(jobID);
+		                  Refine.CreateProjectUI.cancelImportingJob(jobID);
 		                 //---------------------
 		                  $.ajax({
 		                	  type: 'POST',
