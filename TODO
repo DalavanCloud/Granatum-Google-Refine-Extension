@@ -1,0 +1,7 @@
+1- ontology source is sesame store 
+2- adding the option to add extra columns from different endpoints
+3- handle RDF empty and misplace values 
+4- UUID for each study
+5- saving the data in the right Sesame Store
+6- documentation and house keeping
+
